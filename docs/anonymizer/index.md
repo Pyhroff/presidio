@@ -83,7 +83,6 @@ see [Installing Presidio](../installation.md).
     ```
     
     To build the distroless variant instead, run `docker build -f Dockerfile.distroless -t presidio-anonymizer .`.
-    It has no shell and ignores `PORT` and `WORKERS`; configure gunicorn with `GUNICORN_CMD_ARGS`.
     
     #### Using python runtime
     
