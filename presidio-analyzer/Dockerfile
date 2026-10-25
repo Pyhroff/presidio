@@ -22,8 +22,7 @@ COPY ${NLP_CONF_FILE} /app/${NLP_CONF_FILE}
 
 WORKDIR /app
 
-# Apply OS security updates. curl is deliberately not installed: it was only
-# used by the health check and pulls in a large TLS/auth dependency tree.
+# Apply OS security updates.
 RUN apt-get update && apt-get upgrade -y && rm -rf /var/lib/apt/lists/*
 
 COPY ./pyproject.toml ./uv.lock /app/
