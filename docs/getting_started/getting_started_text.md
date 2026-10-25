@@ -121,7 +121,7 @@ docker run -d -p 5001:3000 ghcr.io/data-privacy-stack/presidio-anonymizer:latest
 
 !!! tip "Hardened distroless images"
 
-    Prefer a smaller image with no shell? Use the `-distroless` tags instead, for example `ghcr.io/data-privacy-stack/presidio-analyzer:latest-distroless`. They listen on the same port (3000). See [Installation](../installation.md) for the differences.
+    Prefer a smaller image with no shell? Use the `-distroless` tags instead, for example `ghcr.io/data-privacy-stack/presidio-analyzer:latest-distroless`. They listen on the same port (3000).
 
 3. Use the API
 
