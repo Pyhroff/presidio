@@ -252,16 +252,6 @@ jobs:
             platform_tag: linux-amd64
             runner: ubuntu-latest
             variant: distroless
-          - image: presidio-anonymizer
-            platform: linux/arm64
-            platform_tag: linux-arm64
-            runner: ubuntu-24.04-arm
-            variant: distroless
-          - image: presidio-analyzer
-            platform: linux/arm64
-            platform_tag: linux-arm64
-            runner: ubuntu-24.04-arm
-            variant: distroless
     steps:
       - name: Checkout code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.0
@@ -316,10 +306,6 @@ jobs:
           - platform: linux/amd64
             platform_tag: linux-amd64
             runner: ubuntu-latest
-            variant: distroless
-          - platform: linux/arm64
-            platform_tag: linux-arm64
-            runner: ubuntu-24.04-arm
             variant: distroless
     steps:
       - name: Checkout code
@@ -377,7 +363,7 @@ jobs:
         run: sleep 60
 
       - name: Download Ollama model for LangExtract recognizer tests
-        if: matrix.platform == 'linux/arm64' && matrix.variant != 'distroless'
+        if: matrix.platform == 'linux/arm64'
         run: |
           ollama_container="$(docker compose ps -q ollama)"
           docker exec "$ollama_container" ollama pull qwen2.5:1.5b
@@ -425,9 +411,6 @@ jobs:
             runner: ubuntu-24.04-arm
           - platform: linux/amd64
             runner: ubuntu-latest
-            variant: distroless
-          - platform: linux/arm64
-            runner: ubuntu-24.04-arm
             variant: distroless
     steps:
       - name: Checkout code
@@ -482,7 +465,7 @@ jobs:
         run: sleep 60
 
       - name: Download Ollama model for LangExtract recognizer tests
-        if: matrix.platform == 'linux/arm64' && matrix.variant != 'distroless'
+        if: matrix.platform == 'linux/arm64'
         run: |
           ollama_container="$(docker compose ps -q ollama)"
           docker exec "$ollama_container" ollama pull qwen2.5:1.5b
