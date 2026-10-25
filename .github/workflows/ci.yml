@@ -55,7 +55,7 @@ jobs:
         uses: actions/dependency-review-action@2031cfc080254a8a887f58cffee85186f0e49e48 # v4.5.0
         with:
           fail-on-severity: low
-          allow-licenses: MIT, Apache-2.0, BSD-3-Clause, 0BSD, 0BSD AND Apache-2.0 AND BSD-3-Clause AND MIT
+          allow-licenses: MIT, MIT-CMU, Apache-2.0, BSD-3-Clause, 0BSD, 0BSD AND Apache-2.0 AND BSD-3-Clause AND MIT
           comment-summary-in-pr: on-failure
 
   test:
@@ -67,7 +67,7 @@ jobs:
       pull-requests: write
     strategy:
       matrix:
-        python-version: ['3.10', '3.11', '3.12', '3.13', '3.14']
+        python-version: ['3.11', '3.12', '3.13', '3.14']
         component: 
           - name: 'Analyzer'
             path: 'presidio-analyzer'
@@ -197,10 +197,6 @@ jobs:
       - name: Build wheel package
         working-directory: ${{ matrix.component.path }}
         run: |
-          # `build` needs tomli on Python < 3.11 to read pyproject.toml, and it
-          # isn't in the hashed requirements file; pre-install it (marker-guarded)
-          # so --require-hashes finds it already satisfied.
-          python -m pip install "tomli==2.4.1; python_version < '3.11'"
           pip install --require-hashes -r ${{ github.workspace }}/.github/pipelines/requirements-build.txt
           python -m build --wheel
 
@@ -317,7 +313,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
-          python-version: '3.10'
+          python-version: '3.12'
 
       - name: Cache E2E dependencies
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.0
@@ -410,7 +406,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
-          python-version: '3.10'
+          python-version: '3.12'
 
       - name: Cache E2E dependencies
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.0
