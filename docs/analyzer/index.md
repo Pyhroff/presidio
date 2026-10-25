@@ -47,8 +47,6 @@ see [Installing Presidio](../installation.md).
     docker run -p 5002:3000 presidio-analyzer
     ```
 
-    To build the distroless variant instead, run `docker build -f Dockerfile.distroless -t presidio-analyzer .`.
-
     #### Using python runtime
 
     !!! note "Note"
