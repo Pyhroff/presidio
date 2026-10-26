@@ -32,5 +32,5 @@ USER 1001
 
 EXPOSE ${PORT}
 HEALTHCHECK --interval=30s --timeout=3s --start-period=30s --retries=3 \
-    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:${PORT}/health', timeout=2)"
+    CMD python -c "import urllib.request as u; u.build_opener(u.ProxyHandler({})).open('http://localhost:${PORT}/health', timeout=2)"
 CMD ["./entrypoint.sh"]

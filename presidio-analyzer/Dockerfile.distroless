@@ -37,5 +37,5 @@ COPY . /app/
 USER 65532
 EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=3s --start-period=90s --retries=5 \
-    CMD ["/usr/bin/python3", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:3000/health', timeout=2)"]
+    CMD ["/usr/bin/python3", "-c", "import urllib.request as u; u.build_opener(u.ProxyHandler({})).open('http://localhost:3000/health', timeout=2)"]
 ENTRYPOINT ["/usr/bin/python3", "-m", "gunicorn", "app:create_app()"]

@@ -38,7 +38,7 @@ RUN --mount=type=bind,from=uv,source=/uv,target=/usr/local/bin/uv \
 # install nlp models specified in NLP_CONF_FILE or via nlp_configuration in ANALYZER_CONF_FILE
 COPY ./install_nlp_models.py /app/
 
-# pip is only needed by the model download (spaCy shells out to it), so remove it after.
+# setuptools and wheel are only needed by the model download; pip stays for runtime spaCy downloads.
 RUN python install_nlp_models.py \
     --conf_file ${NLP_CONF_FILE} \
     --analyzer_conf_file ${ANALYZER_CONF_FILE} \
@@ -53,5 +53,5 @@ USER 1001
 
 EXPOSE ${PORT}
 HEALTHCHECK --interval=30s --timeout=3s --start-period=30s --retries=3 \
-    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:${PORT}/health', timeout=2)"
+    CMD python -c "import urllib.request as u; u.build_opener(u.ProxyHandler({})).open('http://localhost:${PORT}/health', timeout=2)"
 CMD ["./entrypoint.sh"]
