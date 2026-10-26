@@ -83,7 +83,9 @@ def test_factory_requires_transformers(mocker):
         spacy.blank("en").add_pipe(FACTORY_NAME, config={"model": "test-model"})
 
 
-def test_factory_requires_model():
+def test_factory_requires_model(mocker):
+    mocker.patch.object(token_pipe_module, "hf_pipeline", Mock())
+
     with pytest.raises(ValueError, match="model is required"):
         spacy.blank("en").add_pipe(FACTORY_NAME)
 

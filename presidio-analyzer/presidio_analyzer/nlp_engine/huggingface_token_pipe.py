@@ -1,4 +1,9 @@
-"""spaCy component for Hugging Face token-classification pipelines."""
+"""spaCy component for Hugging Face token-classification pipelines.
+
+Replaces ``hf_token_pipe`` from spacy-huggingface-pipelines (MIT), whose
+``transformers<5`` pin blocked security fixes. Original:
+https://github.com/explosion/spacy-huggingface-pipelines/blob/main/spacy_huggingface_pipelines/token_classification.py
+"""
 
 import logging
 from collections.abc import Iterable, Iterator, Mapping, Sequence
