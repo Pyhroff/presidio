@@ -42,7 +42,7 @@ COPY ./install_nlp_models.py /app/
 RUN python install_nlp_models.py \
     --conf_file ${NLP_CONF_FILE} \
     --analyzer_conf_file ${ANALYZER_CONF_FILE} \
-    && pip uninstall -y pip setuptools wheel
+    && pip uninstall -y setuptools wheel
 
 COPY . /app/
 
